@@ -16,3 +16,5 @@ export GEMINI_API_KEY=your-api-key
 ```
 
 Look at org.example.ITTest.kt as sample usage.
+
+The API Document can be found at [https://takanori-ugai.github.io/Gemini4KT/](https://takanori-ugai.github.io/Gemini4KT/).
