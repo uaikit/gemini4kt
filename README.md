@@ -13,5 +13,6 @@ To run the example, set your Gemini API key as an environment variable and execu
 ```bash
 export GEMINI_API_KEY=your-api-key
 ./gradlew run
+```
 
 Look at org.example.ITTest.kt as sample usage.
