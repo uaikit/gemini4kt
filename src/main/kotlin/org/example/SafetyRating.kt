@@ -18,5 +18,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SafetyRating(
     val category: HarmCategory,
-    val probability: String,
+    val probability: HarmProbability,
+    val blocked: Boolean,
 )
