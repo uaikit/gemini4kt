@@ -33,12 +33,18 @@ class Gemini(private val apiKey: String) {
      * @param model The model to be used for content generation. Defaults to "gemini-pro".
      * @return The response from the Gemini API as a [Response] object.
      */
-    fun generateContent(inputJson: GenerateContentRequest, model: String = "gemini-pro"): Response {
+    fun generateContent(
+        inputJson: GenerateContentRequest,
+        model: String = "gemini-pro",
+    ): Response {
         val urlString = "$baseUrl/$model:generateContent?key=$apiKey"
         return json.decodeFromString<Response>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
     }
 
-    fun countTokens(inputJson: GenerateContentRequest, model: String = "gemini-pro"): TotalTokens {
+    fun countTokens(
+        inputJson: GenerateContentRequest,
+        model: String = "gemini-pro",
+    ): TotalTokens {
         val urlString = "$baseUrl/$model:countTokens?key=$apiKey"
         println(inputJson)
         return json.decodeFromString<TotalTokens>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
@@ -50,7 +56,10 @@ class Gemini(private val apiKey: String) {
      * @param inputJson The batch embed request payload.
      * @return The batch embed response as a [BatchEmbedResponse] object.
      */
-    fun batchEmbedContents(inputJson: BatchEmbedRequest, model: String = "embedding-001"): BatchEmbedResponse {
+    fun batchEmbedContents(
+        inputJson: BatchEmbedRequest,
+        model: String = "embedding-001",
+    ): BatchEmbedResponse {
         val urlString = "$baseUrl/$model:batchEmbedContents?key=$apiKey"
         return json.decodeFromString<BatchEmbedResponse>(getContent(urlString, json.encodeToString<BatchEmbedRequest>(inputJson)))
     }
@@ -61,7 +70,10 @@ class Gemini(private val apiKey: String) {
      * @param inputJson The embed request payload.
      * @return The embed response as an [EmbedResponse] object.
      */
-    fun embedContent(inputJson: EmbedRequest, model: String = "embedding-001"): EmbedResponse {
+    fun embedContent(
+        inputJson: EmbedRequest,
+        model: String = "embedding-001",
+    ): EmbedResponse {
         val urlString = "$baseUrl/$model:embedContent?key=$apiKey"
         return json.decodeFromString<EmbedResponse>(getContent(urlString, json.encodeToString<EmbedRequest>(inputJson)))
     }

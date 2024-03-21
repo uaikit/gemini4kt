@@ -11,5 +11,5 @@ data class Schema(
     val enum: List<String>,
     val properties: Map<String, Schema>,
     val required: List<String>,
-    val items: Schema
+    val items: Schema,
 )
