@@ -33,15 +33,15 @@ class Gemini(private val apiKey: String) {
      * @param model The model to be used for content generation. Defaults to "gemini-pro".
      * @return The response from the Gemini API as a [Response] object.
      */
-    fun generateContent(inputJson: ContentRequest, model: String = "gemini-pro"): Response {
+    fun generateContent(inputJson: GenerateContentRequest, model: String = "gemini-pro"): Response {
         val urlString = "$baseUrl/$model:generateContent?key=$apiKey"
-        return json.decodeFromString<Response>(getContent(urlString, json.encodeToString<ContentRequest>(inputJson)))
+        return json.decodeFromString<Response>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
     }
 
-    fun countTokens(inputJson: ContentRequest, model: String = "gemini-pro"): TotalTokens {
+    fun countTokens(inputJson: GenerateContentRequest, model: String = "gemini-pro"): TotalTokens {
         val urlString = "$baseUrl/$model:countTokens?key=$apiKey"
         println(inputJson)
-        return json.decodeFromString<TotalTokens>(getContent(urlString, json.encodeToString<ContentRequest>(inputJson)))
+        return json.decodeFromString<TotalTokens>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
     }
 
     /**
