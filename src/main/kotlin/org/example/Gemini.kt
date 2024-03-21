@@ -31,14 +31,14 @@ class Gemini(private val apiKey: String) {
      *
      * @param inputJson The request payload for content generation.
      * @param model The model to be used for content generation. Defaults to "gemini-pro".
-     * @return The response from the Gemini API as a [Response] object.
+     * @return The response from the Gemini API as a [GenerateContentResponse] object.
      */
     fun generateContent(
         inputJson: GenerateContentRequest,
         model: String = "gemini-pro",
-    ): Response {
+    ): GenerateContentResponse {
         val urlString = "$baseUrl/$model:generateContent?key=$apiKey"
-        return json.decodeFromString<Response>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
+        return json.decodeFromString<GenerateContentResponse>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
     }
 
     fun countTokens(
@@ -109,7 +109,7 @@ class Gemini(private val apiKey: String) {
                 OutputStreamWriter(conn.outputStream).use { writer -> writer.write(inputJson) }
             }
 
-            logger.info { "Response Code: ${conn.responseCode}" }
+            logger.info { "GenerateContentResponse Code: ${conn.responseCode}" }
             conn.inputStream.bufferedReader().use { reader ->
                 return reader.readText()
             }

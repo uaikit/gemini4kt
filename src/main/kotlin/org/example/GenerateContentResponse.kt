@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
  *                          offering insights into its adherence to content safety standards.
  */
 @Serializable
-data class Response(
+data class GenerateContentResponse(
     val candidates: List<Candidate>,
     val promptFeedback: PromptFeedback,
 )
