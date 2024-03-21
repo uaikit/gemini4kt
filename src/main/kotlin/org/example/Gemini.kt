@@ -27,29 +27,19 @@ class Gemini(private val apiKey: String) {
     private val baseUrl = "https://generativelanguage.googleapis.com/v1beta/models"
 
     /**
-     * Extracts content based on the provided input JSON using the Gemini Pro model.
+     * Generates content based on the provided input JSON using a specified model.
      *
-     * @param inputJson The request payload for content extraction.
+     * @param inputJson The request payload for content generation.
+     * @param model The model to be used for content generation. Defaults to "gemini-pro".
      * @return The response from the Gemini API as a [Response] object.
      */
-    fun extract(inputJson: ContentRequest): Response {
-        val urlString = "$baseUrl/gemini-pro:generateContent?key=$apiKey"
+    fun generateContent(inputJson: ContentRequest, model: String = "gemini-pro"): Response {
+        val urlString = "$baseUrl/$model:generateContent?key=$apiKey"
         return json.decodeFromString<Response>(getContent(urlString, json.encodeToString<ContentRequest>(inputJson)))
     }
 
-    /**
-     * Extracts content based on the provided input JSON using the Gemini Pro Vision model.
-     *
-     * @param inputJson The request payload for content extraction.
-     * @return The response from the Gemini API as a [Response] object.
-     */
-    fun extract2(inputJson: ContentRequest): Response {
-        val urlString = "$baseUrl/gemini-pro-vision:generateContent?key=$apiKey"
-        return json.decodeFromString<Response>(getContent(urlString, json.encodeToString<ContentRequest>(inputJson)))
-    }
-
-    fun countTokens(inputJson: ContentRequest): TotalTokens {
-        val urlString = "$baseUrl/gemini-pro:countTokens?key=$apiKey"
+    fun countTokens(inputJson: ContentRequest, model: String = "gemini-pro"): TotalTokens {
+        val urlString = "$baseUrl/$model:countTokens?key=$apiKey"
         println(inputJson)
         return json.decodeFromString<TotalTokens>(getContent(urlString, json.encodeToString<ContentRequest>(inputJson)))
     }
@@ -60,8 +50,8 @@ class Gemini(private val apiKey: String) {
      * @param inputJson The batch embed request payload.
      * @return The batch embed response as a [BatchEmbedResponse] object.
      */
-    fun batchEmbedContents(inputJson: BatchEmbedRequest): BatchEmbedResponse {
-        val urlString = "$baseUrl/embedding-001:batchEmbedContents?key=$apiKey"
+    fun batchEmbedContents(inputJson: BatchEmbedRequest, model: String = "embedding-001"): BatchEmbedResponse {
+        val urlString = "$baseUrl/$model:batchEmbedContents?key=$apiKey"
         return json.decodeFromString<BatchEmbedResponse>(getContent(urlString, json.encodeToString<BatchEmbedRequest>(inputJson)))
     }
 
@@ -71,8 +61,8 @@ class Gemini(private val apiKey: String) {
      * @param inputJson The embed request payload.
      * @return The embed response as an [EmbedResponse] object.
      */
-    fun embedContent(inputJson: EmbedRequest): EmbedResponse {
-        val urlString = "$baseUrl/embedding-001:embedContent?key=$apiKey"
+    fun embedContent(inputJson: EmbedRequest, model: String = "embedding-001"): EmbedResponse {
+        val urlString = "$baseUrl/$model:embedContent?key=$apiKey"
         return json.decodeFromString<EmbedResponse>(getContent(urlString, json.encodeToString<EmbedRequest>(inputJson)))
     }
 
