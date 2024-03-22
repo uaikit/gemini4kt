@@ -19,24 +19,24 @@ fun main() {
                 ),
         )
     println(gemini.generateContent(inputJson).candidates[0].content.parts[0].text!!.replace("\n\n", "\n"))
-    val inputJson2 = GenerateContentRequest(listOf(Content(listOf(Part(text)))))
+    val inputJson2 = CountTokensRequest(listOf(Content(listOf(Part(text)))))
     println(gemini.countTokens(inputJson2))
     val embedRequest =
-        EmbedRequest(
+        EmbedContentRequest(
             content = Content(listOf(Part(text))),
             model = "models/embedding-001",
         )
-    println(gemini.embedContent(embedRequest))
+    println(gemini.embedContent(embedRequest, model = "embedding-001"))
     val batchEmbedRequest =
         BatchEmbedRequest(
             listOf(
-                EmbedRequest(
+                EmbedContentRequest(
                     content = Content(listOf(Part(text))),
                     model = "models/embedding-001",
                 ),
             ),
         )
-    println(gemini.batchEmbedContents(batchEmbedRequest))
+    println(gemini.batchEmbedContents(batchEmbedRequest, model = "embedding-001"))
 
     println(gemini.getModels())
 

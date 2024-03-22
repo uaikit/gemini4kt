@@ -42,12 +42,12 @@ class Gemini(private val apiKey: String) {
     }
 
     fun countTokens(
-        inputJson: GenerateContentRequest,
+        inputJson: CountTokensRequest,
         model: String = "gemini-pro",
     ): TotalTokens {
         val urlString = "$baseUrl/$model:countTokens?key=$apiKey"
         println(inputJson)
-        return json.decodeFromString<TotalTokens>(getContent(urlString, json.encodeToString<GenerateContentRequest>(inputJson)))
+        return json.decodeFromString<TotalTokens>(getContent(urlString, json.encodeToString<CountTokensRequest>(inputJson)))
     }
 
     /**
@@ -71,11 +71,11 @@ class Gemini(private val apiKey: String) {
      * @return The embed response as an [EmbedResponse] object.
      */
     fun embedContent(
-        inputJson: EmbedRequest,
+        inputJson: EmbedContentRequest,
         model: String = "embedding-001",
     ): EmbedResponse {
         val urlString = "$baseUrl/$model:embedContent?key=$apiKey"
-        return json.decodeFromString<EmbedResponse>(getContent(urlString, json.encodeToString<EmbedRequest>(inputJson)))
+        return json.decodeFromString<EmbedResponse>(getContent(urlString, json.encodeToString<EmbedContentRequest>(inputJson)))
     }
 
     /**
@@ -100,6 +100,7 @@ class Gemini(private val apiKey: String) {
         inputJson: String? = null,
     ): String {
         try {
+            logger.info { inputJson }
             val url = URL(urlStr)
             val conn = url.openConnection() as HttpURLConnection
             conn.requestMethod = if (inputJson == null) "GET" else "POST"
@@ -108,8 +109,15 @@ class Gemini(private val apiKey: String) {
                 conn.doOutput = true
                 OutputStreamWriter(conn.outputStream).use { writer -> writer.write(inputJson) }
             }
-
-            logger.info { "GenerateContentResponse Code: ${conn.responseCode}" }
+            val resCode = conn.responseCode
+            if (resCode != 200) {
+                logger.error { "Error: ${conn.responseCode}" }
+                conn.inputStream.bufferedReader().use { reader ->
+                    logger.error { "Error Message: ${reader.readText()}" }
+                }
+                return "{}"
+            }
+            logger.info { "GenerateContentResponse Code: $resCode" }
             conn.inputStream.bufferedReader().use { reader ->
                 return reader.readText()
             }
