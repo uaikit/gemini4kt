@@ -18,7 +18,7 @@ fun main() {
                     ),
                 ),
         )
-    println(gemini.generateContent(inputJson).candidates[0].content.parts[0].text!!.replace("\n\n", "\n"))
+    println(gemini.generateContent(inputJson, model = "gemini-1.0-pro").candidates[0].content.parts[0].text!!.replace("\n\n", "\n"))
     val inputJson2 = CountTokensRequest(listOf(Content(listOf(Part(text)))))
     println(gemini.countTokens(inputJson2))
     val embedRequest =
