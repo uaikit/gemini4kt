@@ -35,7 +35,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "io.github.takanori-ugai"
             artifactId = "Gemini4KT"
-            version = "0.1-SNAPSHOT"
+            version = "0.2-SNAPSHOT"
             from(components["java"])
             pom {
                 name = "Gemini4KT"
@@ -71,8 +71,8 @@ publishing {
         maven {
             url = uri("https://maven.pkg.jetbrains.space/fujitsu/p/main/maven")
             credentials {
-                username = project.property("spaceUID") as String
-                password = project.property("spacePWD") as String
+                username = property("spaceUID") as String
+                password = property("spacePWD") as String
             }
         }
     }
