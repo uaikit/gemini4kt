@@ -15,7 +15,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
     jacoco
     `maven-publish`
-//    signing
+    signing
 }
 
 group = "io.github.takanori-ugai"
@@ -35,7 +35,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "io.github.takanori-ugai"
             artifactId = "Gemini4KT"
-            version = "0.2-SNAPSHOT"
+            version = "0.3-SNAPSHOT"
             from(components["java"])
             pom {
                 name = "Gemini4KT"
@@ -78,12 +78,9 @@ publishing {
     }
 }
 
-// signing {
-//    if (project.hasProperty("signing.keyId") && project.hasProperty("signing.password") && project.hasProperty("signing.secretKeyRingFile")) {
-//        useInMemoryPgpKeys(project.property("signing.keyId") as String, project.property("signing.secretKeyRingFile") as String, project.property("signing.password") as String)
-//        sign(publishing.publications["maven"])
-//    }
-// }
+signing {
+    sign(publishing.publications["maven"])
+}
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
