@@ -9,7 +9,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.9.20"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.github.spotbugs") version "6.0.18"
+    id("com.github.spotbugs") version "6.1.13"
     id("com.github.jk1.dependency-license-report") version "2.9"
     id("com.diffplug.spotless") version "7.0.4"
     id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
