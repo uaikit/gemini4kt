@@ -1,17 +1,18 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "1.9.23"
     application
     id("org.jetbrains.dokka") version "1.9.20"
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.github.spotbugs") version "6.0.18"
+    id("com.github.spotbugs") version "6.1.13"
     id("com.github.jk1.dependency-license-report") version "2.9"
-    id("com.diffplug.spotless") version "6.25.0"
+    id("com.diffplug.spotless") version "7.0.4"
     id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
     jacoco
     `maven-publish`
@@ -105,12 +106,12 @@ tasks {
     }
 
     compileKotlin {
-        kotlinOptions.jvmTarget = "11"
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         doLast { println("Finished compiling Kotlin source code") }
     }
 
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "11"
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         doLast { println("Finished compiling Kotlin Test source code") }
     }
 
@@ -194,7 +195,7 @@ tasks {
 }
 
 ktlint {
-    setVersion("1.0.0")
+    setVersion("1.6.0")
     verbose.set(true)
     outputToConsole.set(true)
     coloredOutput.set(true)
@@ -218,7 +219,7 @@ detekt {
 }
 
 jacoco {
-    toolVersion = "0.8.11"
+    toolVersion = "0.8.13"
 }
 
 spotbugs {
@@ -234,7 +235,7 @@ spotless {
         removeUnusedImports()
 
         // Choose one of these formatters.
-        googleJavaFormat("1.21.0") // has its own section below
+        googleJavaFormat("1.27.0") // has its own section below
         formatAnnotations() // fixes formatting of type annotations, see below
     }
 }
