@@ -7,7 +7,7 @@ plugins {
     kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "2.2.0"
     application
-    id("org.jetbrains.dokka") version "1.9.20"
+    id("org.jetbrains.dokka") version "2.0.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.github.spotbugs") version "6.1.13"
@@ -145,24 +145,6 @@ tasks {
         sourceDirectories.setFrom(files(listOf("src/main/java", "src/main/kotlin")))
     }
 
-    dokkaHtml.configure {
-        dokkaSourceSets {
-            configureEach {
-                jdkVersion.set(11)
-                noStdlibLink.set(true)
-            }
-        }
-    }
-
-    dokkaJavadoc.configure {
-        dokkaSourceSets {
-            configureEach {
-                jdkVersion.set(11)
-                noStdlibLink.set(true)
-            }
-        }
-    }
-
     test {
         testLogging {
 //            exceptionFormat = TestExceptionFormat.FULL
@@ -237,6 +219,14 @@ spotless {
         // Choose one of these formatters.
         googleJavaFormat("1.27.0") // has its own section below
         formatAnnotations() // fixes formatting of type annotations, see below
+    }
+}
+
+dokka.dokkaSourceSets {
+    configureEach {
+        jdkVersion.set(17)
+        enableJdkDocumentationLink.set(false)
+        enableKotlinStdLibDocumentationLink.set(false)
     }
 }
 
