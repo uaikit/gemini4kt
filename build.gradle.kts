@@ -144,24 +144,6 @@ tasks {
         sourceDirectories.setFrom(files(listOf("src/main/java", "src/main/kotlin")))
     }
 
-    dokkaHtml.configure {
-        dokkaSourceSets {
-            configureEach {
-                jdkVersion.set(11)
-                noStdlibLink.set(true)
-            }
-        }
-    }
-
-    dokkaJavadoc.configure {
-        dokkaSourceSets {
-            configureEach {
-                jdkVersion.set(11)
-                noStdlibLink.set(true)
-            }
-        }
-    }
-
     test {
         testLogging {
 //            exceptionFormat = TestExceptionFormat.FULL
@@ -236,6 +218,14 @@ spotless {
         // Choose one of these formatters.
         googleJavaFormat("1.21.0") // has its own section below
         formatAnnotations() // fixes formatting of type annotations, see below
+    }
+}
+
+dokka.dokkaSourceSets {
+    configureEach {
+        jdkVersion.set(17)
+        enableJdkDocumentationLink.set(false)
+        enableKotlinStdLibDocumentationLink.set(false)
     }
 }
 
