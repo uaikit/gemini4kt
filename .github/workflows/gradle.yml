@@ -34,4 +34,4 @@ jobs:
       uses: gradle/actions/setup-gradle@v4.4.3
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build dokkaHtml
+      run: ./gradlew build dokkaGeneratePublicationHtml
