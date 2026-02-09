@@ -5,7 +5,7 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     kotlin("jvm") version "2.3.10"
-    kotlin("plugin.serialization") version "2.3.0"
+    kotlin("plugin.serialization") version "2.3.10"
     application
     id("org.jetbrains.dokka") version "2.1.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
