@@ -12,7 +12,7 @@ plugins {
     id("com.gradleup.shadow") version "9.6.1"
     id("com.github.spotbugs") version "6.5.11"
     id("com.github.jk1.dependency-license-report") version "3.1.4"
-    id("com.diffplug.spotless") version "8.10.1"
+    id("com.diffplug.spotless") version "8.10.2"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     jacoco
     `maven-publish`
