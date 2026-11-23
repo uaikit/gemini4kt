@@ -85,7 +85,7 @@ signing {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.13.0")
-    implementation("ch.qos.logback:logback-classic:1.6.6")
+    implementation("ch.qos.logback:logback-classic:1.6.8")
     implementation("io.github.oshai:kotlin-logging-jvm:8.0.7")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
